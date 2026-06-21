@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界杯赛程 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f2f4f8;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 70%, #334155 100%);
+            color: #e2e8f0;
+            padding: 4rem 2rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #f59e0b, #3b82f6, #8b5cf6);
+            opacity: 0.6;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            color: #f8fafc;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            margin-top: 1.5rem;
+            background: rgba(245, 158, 11, 0.18);
+            color: #fcd34d;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        /* 说明区 — 目录感布局 */
+        .directory-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .intro-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.06);
+            transition: transform 0.15s ease, box-shadow 0.2s;
+        }
+
+        .intro-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .intro-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #0f172a;
+            border-left: 4px solid #3b82f6;
+            padding-left: 0.8rem;
+        }
+
+        .intro-card p {
+            color: #334155;
+            margin-bottom: 0.3rem;
+        }
+
+        .intro-card .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            background: #eef2ff;
+            color: #2563eb;
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            margin-top: 0.3rem;
+        }
+
+        /* 提示区 + 相关信息区（两栏） */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .info-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .info-panel h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #64748b;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.4rem;
+        }
+
+        .info-panel ul, .info-panel .faq-item {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-panel li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+
+        .info-panel li::before {
+            content: '▹';
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #0f172a;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item p {
+            color: #475569;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        /* 强调色链接 */
+        a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s, border-bottom 0.1s;
+            border-bottom: 1px solid transparent;
+        }
+
+        a:hover {
+            color: #1e40af;
+            border-bottom: 1px solid #1e40af;
+        }
+
+        /* 场景 — 提醒区 */
+        .scene-note {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.8rem 2.2rem;
+            margin: 2.2rem 0 2rem;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1rem 1.8rem;
+        }
+
+        .scene-note .emoji-icon {
+            font-size: 2.2rem;
+            line-height: 1;
+        }
+
+        .scene-note .scene-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .scene-note .scene-text p {
+            margin-bottom: 0.2rem;
+            color: #1e293b;
+        }
+
+        .scene-note .scene-text small {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        /* 底部 */
+        .footer-note {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #d1d9e6;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .footer-note a {
+            color: #2563eb;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .directory-intro, .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .intro-card, .info-panel {
+                padding: 1.5rem;
+            }
+            .scene-note {
+                flex-direction: column;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 2.5rem 1rem 2rem; }
+            .container { padding: 1.5rem 1rem; }
+            .intro-card h3 { font-size: 1.05rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>世界杯赛程 · 知识库</h1>
+        <p>赛历、对阵、阶段与背景信息——一个聚焦世界杯日程的结构化入口。</p>
+        <span class="badge">⚽ 赛事信息聚合</span>
+    </header>
+
+    <div class="container">
+        <!-- 说明区：目录感布局 两卡片 -->
+        <div class="directory-intro">
+            <div class="intro-card">
+                <h3>📋 赛程总览</h3>
+                <p>小组赛、淘汰赛、决赛日期与场地，按时间线整理。支持快速检索某一轮次或特定球队的日程。</p>
+                <span class="tag">阶段索引</span>
+            </div>
+            <div class="intro-card">
+                <h3>🗂️ 对阵详情</h3>
+                <p>每场比赛的开球时间、所在城市、体育场，以及分组形势。数据保持贴近官方发布节奏。</p>
+                <span class="tag">对阵表</span>
+            </div>
+        </div>
+
+        <!-- 提示区 + 相关信息区 -->
+        <div class="info-grid">
+            <div class="info-panel">
+                <h4>📌 使用提示</h4>
+                <ul>
+                    <li>赛程时间默认以北京时间显示，页面顶部可切换时区。</li>
+                    <li>淘汰赛阶段的对阵会随小组赛结果更新，请留意标注。</li>
+                    <li>部分历史赛历保留供参考，当前赛事以最新为准。</li>
+                    <li>移动端同样适配，横屏时显示更多列信息。</li>
+                </ul>
+            </div>
+            <div class="info-panel">
+                <h4>📎 相关信息</h4>
+                <div class="faq-item">
+                    <strong>数据多久更新一次？</strong>
+                    <p>通常在国际足联官方确认后 24 小时内同步，重大调整会额外标注。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>是否包含往届赛程？</strong>
+                    <p>主要聚焦当届日程，但部分页面存档了最近两届的赛历以供对照。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>需要注册才能使用吗？</strong>
+                    <p>不需要，所有赛程信息均直接可见，无登录门槛。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 场景提醒区 / 叙述性段落 -->
+        <div class="scene-note">
+            <div class="emoji-icon">🔍</div>
+            <div class="scene-text">
+                <p>如果你想快速定位某一天、某一支球队的所有比赛，或只是大致了解整个赛事的节奏，不妨从赛程总览开始。</p>
+                <p>页面本身就是一个轻量知识库，赛历、分组、场馆信息都可以直接查阅。你可以将 <a href="https://cnweb-wcschedule.com">世界杯赛程</a> 添加至书签，在比赛期间随时回来核对时间。</p>
+                <small>—— 没有弹窗广告，也没有冗余推荐，只呈现日程本身。</small>
+            </div>
+        </div>
+
+        <!-- 一个附加说明段落，自然嵌入链接 -->
+        <div style="background: white; border-radius: 20px; padding: 1.5rem 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03); margin-top: 0.5rem;">
+            <p style="margin-bottom: 0.3rem; color: #1e293b;">无论你是想回顾刚结束的比赛，还是提前规划观赛时间，<a href="https://cnweb-wcschedule.com">世界杯赛程</a> 都提供一个干净、专注的日程查詢方式。页面结构倾向于目录式浏览——按阶段、日期或球队维度展开，而非单纯列表。</p>
+            <p style="color: #475569; font-size: 0.9rem; margin-top: 0.5rem;">此外，每个比赛日附有简短的背景说明（如小组出线形势、历史交锋记录等），帮助你在看赛程时也了解上下文。</p>
+        </div>
+
+        <div class="footer-note">
+            <p>© 世界杯赛程信息页 · 数据仅供参考，具体以官方发布为准 · <a href="https://cnweb-wcschedule.com" style="border-bottom: 1px solid #2563eb;">世界杯赛程</a></p>
+        </div>
+    </div>
+</body>
+</html>
